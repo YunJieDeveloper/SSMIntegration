@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:tx="http://www.springframework.org/schema/tx"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://www.springframework.org/schema/context
+       http://www.springframework.org/schema/context/spring-context.xsd
+       http://www.springframework.org/schema/tx
+       http://www.springframework.org/schema/tx/spring-tx.xsd">
+
+
+    <!-- 扫描service包下所有使用注解的类型 -->
+    <context:component-scan base-package="com.ssm.service"/>
+
+
+    <!-- 配置数据库相关参数properties的属性：${url} -->
+    <context:property-placeholder location="classpath:application.properties"/>
+
+
+    <!-- 数据库连接池c3p0  与dbcp\druid任选其一-->
+    <bean id="c3p0DataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+        <property name="driverClass" value="${jdbc.c3p0.driver}"/>
+        <property name="jdbcUrl" value="${jdbc.c3p0.url}"/>
+        <property name="user" value="${jdbc.c3p0.user}"/>
+        <property name="password" value="${jdbc.c3p0.password}"/>
+        <property name="maxPoolSize" value="${c3p0.maxPoolSize}"/>
+        <property name="minPoolSize" value="${c3p0.minPoolSize}"/>
+        <property name="autoCommitOnClose" value="${c3p0.autoCommitOnClose}"/>
+        <property name="checkoutTimeout" value="${c3p0.checkoutTimeout}"/>
+        <property name="acquireRetryAttempts" value="${c3p0.acquireRetryAttempts}"/>
+    </bean>
+
+    <!-- dbcp连接池配置，与c3p0\druid任选其一 -->
+    <bean id="dbcpDataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+        <property name="driverClassName" value="${jdbc.dbcp.driverClassName}"/>
+        <property name="url" value="${jdbc.dbcp.url}"/>
+        <property name="username" value="${jdbc.dbcp.username}"/>
+        <property name="password" value="${jdbc.dbcp.password}"/>
+    </bean>
+
+    <!-- druid连接池配置，与c3p0\dbcp任选其一 -->
+    <bean id="druidDataSource" class="com.alibaba.druid.pool.DruidDataSource" init-method="init" destroy-method="close">
+        <property name="driverClassName">
+            <value>${jdbc.druid.driverClassName}</value>
+        </property>
+        <property name="url">
+            <value>${jdbc.druid.url}</value>
+        </property>
+        <property name="username">
+            <value>${jdbc.druid.username}</value>
+        </property>
+        <property name="password">
+            <value>${jdbc.druid.password}</value>
+        </property>
+        <!-- 连接池最大使用连接数 -->
+        <property name="maxActive">
+            <value>20</value>
+        </property>
+        <!-- 初始化连接大小 -->
+        <property name="initialSize">
+            <value>1</value>
+        </property>
+        <!-- 获取连接最大等待时间 -->
+        <property name="maxWait">
+            <value>60000</value>
+        </property>
+        <!-- 连接池最大空闲 -->
+        <property name="maxIdle">
+            <value>20</value>
+        </property>
+        <!-- 连接池最小空闲 -->
+        <property name="minIdle">
+            <value>3</value>
+        </property>
+        <!-- 自动清除无用连接 -->
+        <property name="removeAbandoned">
+            <value>true</value>
+        </property>
+        <!-- 清除无用连接的等待时间 -->
+        <property name="removeAbandonedTimeout">
+            <value>180000</value>
+        </property>
+        <!-- 连接属性 -->
+        <property name="connectionProperties">
+            <value>clientEncoding=UTF-8</value>
+        </property>
+        <!-- 配置间隔多久才进行一次检测，检测需要关闭的空闲连接，单位是毫秒 -->
+        <property name="timeBetweenEvictionRunsMillis" value="60000"/>
+        <!-- 配置一个连接在池中最小生存的时间，单位是毫秒 -->
+        <property name="minEvictableIdleTimeMillis" value="300000"/>
+        <property name="validationQuery" value="SELECT 'x'"/>
+        <property name="testWhileIdle" value="true"/>
+        <property name="testOnBorrow" value="false"/>
+        <property name="testOnReturn" value="false"/>
+        <!-- 打开PSCache，并且指定每个连接上PSCache的大小 -->
+        <property name="poolPreparedStatements" value="true" />
+        <property name="maxPoolPreparedStatementPerConnectionSize" value="20" />
+        <!-- 该配置可以访问监控界面 http://ip：port/projectName/druid/index.html-->
+        <!-- 配置监控统计拦截的filters，去掉后监控界面sql无法统计 -->
+        <property name="filters" value="stat"/>
+    </bean>
+
+
+    <!-- 配置SqlSessionFactory对象 -->
+    <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+        <!-- 注入数据库连接池 -->
+        <!-- c3p0   与dbcp、druid任选其一-->
+        <property name="dataSource" ref="c3p0DataSource"/>
+        <!-- dbcp   与c3p0、druid任选其一-->
+        <!--<property name="dataSource" ref="dbcpDataSource"/>-->
+        <!-- druid  与c3p0、dbcp任选其一-->
+        <!--<property name="dataSource" ref="druidDataSource"/>-->
+        <!-- 扫描model包 使用别名 -->
+        <property name="typeAliasesPackage" value="com.ssm.model"/>
+        <!-- 扫描sql配置文件:mapper需要的xml文件 -->
+        <property name="mapperLocations" value="classpath:mapper/*.xml"/>
+    </bean>
+
+
+    <!-- 配置扫描Dao接口包，动态实现Dao接口，注入到spring容器中 -->
+    <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <!-- 注入sqlSessionFactory -->
+        <property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"/>
+        <!-- 给出需要扫描Dao接口包 -->
+        <property name="basePackage" value="com.ssm.dao"/>
+    </bean>
+
+
+    <!-- 配置事务管理器 -->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+        <!-- 注入数据库连接池c3p0 -->
+        <!-- c3p0 与dbcp任选其一-->
+        <!--<property name="dataSource" ref="c3p0DataSource"/>-->
+        <!-- dbcp 与c3p0任选其一-->
+        <!--<property name="dataSource" ref="dbcpDataSource"/>-->
+        <!-- druid  与c3p0、dbcp任选其一-->
+        <property name="dataSource" ref="druidDataSource"/>
+
+    </bean>
+
+
+    <!-- 配置基于注解的声明式事务 -->
+    <tx:annotation-driven transaction-manager="transactionManager"/>
+
+
+</beans>
