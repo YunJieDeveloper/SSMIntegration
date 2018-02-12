@@ -1,0 +1,12 @@
+com/ssm/model/User.class
+com/ssm/controller/UserController.class
+com/ssm/model/People.class
+com/ssm/model/PeopleExample.class
+com/ssm/util/GeneratorTool.class
+com/ssm/dao/PeopleMapper.class
+com/ssm/model/PeopleExample$GeneratedCriteria.class
+com/ssm/service/impl/UserServiceImpl.class
+com/ssm/dao/IUserDao.class
+com/ssm/model/PeopleExample$Criterion.class
+com/ssm/service/IUserService.class
+com/ssm/model/PeopleExample$Criteria.class

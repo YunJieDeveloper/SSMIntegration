@@ -96,6 +96,7 @@
       <version>${mybatis.version}</version>
     </dependency>
 
+    <!-- mybatis代码自动生成工具-->
     <dependency>
       <groupId>org.mybatis.generator</groupId>
       <artifactId>mybatis-generator-core</artifactId>
@@ -166,11 +167,11 @@
         </configuration>
       </plugin>
 
-      <plugin>
+     <!-- <plugin>
         <groupId>org.mybatis.generator</groupId>
         <artifactId>mybatis-generator-maven-plugin</artifactId>
         <version>${mybatis-generator.version}</version>
-        <!-- 数据库驱动  -->
+        &lt;!&ndash; 数据库驱动  &ndash;&gt;
         <dependencies>
           <dependency>
             <groupId>mysql</groupId>
@@ -178,7 +179,7 @@
             <version>${mysql.version}</version>
           </dependency>
         </dependencies>
-        <!-- 自动生成 -->
+        &lt;!&ndash; 自动生成 &ndash;&gt;
         <executions>
           <execution>
             <id>Generate MyBatis Artifacts</id>
@@ -186,16 +187,16 @@
               <goal>generate</goal>
             </goals>
             <configuration>
-              <!-- 指定文件位置好像不起作用，始终默认读取src/main/resources/generatorConfig.xml文件 -->
+              &lt;!&ndash; 指定文件位置好像不起作用，始终默认读取src/main/resources/generatorConfig.xml文件 &ndash;&gt;
               <configurationFile>src/main/resources/generatorConfig.xml</configurationFile>
-              <!--允许移动生成的文件-->
+              &lt;!&ndash;允许移动生成的文件&ndash;&gt;
               <verbose>true</verbose>
-              <!--允许覆盖生成的文件-->
+              &lt;!&ndash;允许覆盖生成的文件&ndash;&gt;
               <overwrite>true</overwrite>
             </configuration>
           </execution>
         </executions>
-      </plugin>
+      </plugin>-->
     </plugins>
   </build>
 </project>

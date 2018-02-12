@@ -39,7 +39,7 @@
             <!-- 设置是否在getter方法中，对String类型字段调用trim()方法 -->
             <property name="trimStrings" value="true"/>
         </javaModelGenerator>
-        <!--对应的xml mapper文件  -->
+        <!--对应的xml mapper文件   生成的文件需移动至resources/mapper目录下，否则读不到-->
         <sqlMapGenerator targetPackage="${sqlMapperPackage}" targetProject="${targetProject}" >
             <property name="enableSubPackages" value="true"/>
         </sqlMapGenerator>

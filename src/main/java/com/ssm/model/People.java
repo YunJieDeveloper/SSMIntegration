@@ -169,4 +169,6 @@ public class People {
         result = prime * result + ((getNote() == null) ? 0 : getNote().hashCode());
         return result;
     }
+
+
 }
