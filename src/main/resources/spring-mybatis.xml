@@ -11,10 +11,6 @@
        http://www.springframework.org/schema/tx/spring-tx.xsd">
 
 
-    <!-- 扫描service包下所有使用注解的类型 -->
-    <context:component-scan base-package="com.ssm.service"/>
-
-
     <!-- 配置数据库相关参数properties的属性：${url} -->
     <context:property-placeholder location="classpath:application.properties"/>
 
@@ -107,11 +103,11 @@
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <!-- 注入数据库连接池 -->
         <!-- c3p0   与dbcp、druid任选其一-->
-        <property name="dataSource" ref="c3p0DataSource"/>
+        <!--<property name="dataSource" ref="c3p0DataSource"/>-->
         <!-- dbcp   与c3p0、druid任选其一-->
         <!--<property name="dataSource" ref="dbcpDataSource"/>-->
         <!-- druid  与c3p0、dbcp任选其一-->
-        <!--<property name="dataSource" ref="druidDataSource"/>-->
+        <property name="dataSource" ref="druidDataSource"/>
         <!-- 扫描model包 使用别名 -->
         <property name="typeAliasesPackage" value="com.ssm.model"/>
         <!-- 扫描sql配置文件:mapper需要的xml文件 -->

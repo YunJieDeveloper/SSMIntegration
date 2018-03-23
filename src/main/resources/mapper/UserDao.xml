@@ -9,7 +9,7 @@
      <select id="selectUser" resultType="User" parameterType="int">
          <!-- #方式能够很大程度防止sql注入
          MyBatis排序时使用order by 动态参数时需要注意，用$而不是#-->
-       SELECT * FROM User WHERE id = #{id}
+       SELECT * FROM t_user WHERE id = #{id}
      </select>
 
 
