@@ -7,6 +7,8 @@
           <element id="module-output" name="SSMIntegration" />
         </element>
         <element id="directory" name="lib">
+          <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
+          <element id="library" level="project" name="Maven: taglibs:standard:1.1.2" />
           <element id="library" level="project" name="Maven: javax:javaee-api:7.0" />
           <element id="library" level="project" name="Maven: com.sun.mail:javax.mail:1.5.0" />
           <element id="library" level="project" name="Maven: javax.activation:activation:1.1" />
@@ -37,6 +39,8 @@
           <element id="library" level="project" name="Maven: org.springframework:spring-web:4.3.5.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-webmvc:4.3.5.RELEASE" />
           <element id="library" level="project" name="Maven: org.springframework:spring-test:4.3.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-websocket:4.3.5.RELEASE" />
+          <element id="library" level="project" name="Maven: org.springframework:spring-messaging:4.3.5.RELEASE" />
         </element>
       </element>
       <element id="directory" name="META-INF">

@@ -10,7 +10,7 @@ import java.util.Date;
  * */
 @Data
 public class User {
-    private int id;
+    private Long id;
     private String name;
     private String depart;
     private Double salary;

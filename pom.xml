@@ -32,6 +32,19 @@
       <scope>test</scope>
     </dependency>
 
+
+    <!-- java.lang.NoClassDefFoundError: javax/servlet/jsp/jstl/core/Config解决方案 -->
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>jstl</artifactId>
+      <version>1.2</version>
+    </dependency>
+
+    <dependency>
+      <groupId>taglibs</groupId>
+      <artifactId>standard</artifactId>
+      <version>1.1.2</version>
+    </dependency>
     <!-- java ee -->
     <dependency>
       <groupId>javax</groupId>
@@ -150,6 +163,18 @@
     <dependency>
       <groupId>org.springframework</groupId>
       <artifactId>spring-test</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+
+    <!--websocket-->
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-websocket</artifactId>
+      <version>${spring.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-messaging</artifactId>
       <version>${spring.version}</version>
     </dependency>
 
