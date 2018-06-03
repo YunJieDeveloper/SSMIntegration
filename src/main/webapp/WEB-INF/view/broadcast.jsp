@@ -9,7 +9,7 @@ String basePath= request.getScheme() + "://" + request.getServerName() + ":" + r
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title></title>
-    <script type="text/javascript" src="<%=basePath%>resources/js/jquery.js"></script>
+    <script type="text/javascript" src="<%=basePath%>resources/js/jquery-3.1.1.js"></script>
     <script type="text/javascript" src="<%=basePath%>resources/js/sockjs-0.3.4.min.js"></script>
     <script type="text/javascript">
         var path='<%=basePath%>';
